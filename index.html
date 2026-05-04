@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Marketing Suite | Official</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #075e54, #128c7e, #25d366);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            overflow: hidden;
+        }
+        .header {
+            background: #075e54;
+            color: white;
+            padding: 25px 35px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; }
+        .header p { opacity: 0.9; margin-top: 5px; }
+        .login-box {
+            padding: 40px;
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 60px;
+            font-size: 16px;
+        }
+        .btn-login {
+            background: #075e54;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+        .dashboard { display: none; padding: 30px; }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #f8f9fa;
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+        .card h3 {
+            color: #075e54;
+            margin-bottom: 18px;
+            font-size: 22px;
+            border-left: 4px solid #25d366;
+            padding-left: 12px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 16px;
+            font-family: inherit;
+        }
+        button {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 4px 4px 0 0;
+        }
+        .btn-warning { background: #ff9800; }
+        .btn-danger { background: #dc3545; }
+        .btn-info { background: #17a2b8; }
+        .log-area {
+            background: #1e1e2f;
+            border-radius: 20px;
+            padding: 20px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+        .log-line {
+            color: #00ff88;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 5px 0;
+            border-bottom: 1px solid #334;
+        }
+        .footer {
+            background: #f1f1f1;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+        @media (max-width: 700px) {
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📱 WhatsApp Marketing Suite Pro</h1>
+        <p>Official Partner – Broadcast & Promosi Massal</p>
+    </div>
+
+    <!-- LOGIN AREA -->
+    <div id="loginArea" style="padding: 30px;">
+        <div class="login-box">
+            <h2 style="margin-bottom: 20px;">🔐 Akses Dashboard</h2>
+            <input type="text" id="loginUser" placeholder="Username">
+            <input type="password" id="loginPass" placeholder="Password">
+            <button class="btn-login" id="loginBtn">Masuk ke Panel</button>
+            <p style="margin-top: 20px; font-size: 12px; color: #888;">Demo: manz / Manz123</p>
+        </div>
+    </div>
+
+    <!-- DASHBOARD UTAMA -->
+    <div id="dashboard" class="dashboard">
+        <div class="card-grid">
+            <div class="card">
+                <h3>🎯 Target Nomor</h3>
+                <input type="text" id="targetNumber" placeholder="6281234567890">
+                <div>
+                    <button id="sendOnceBtn">📨 Kirim Sekali</button>
+                    <button id="spam50Btn" class="btn-warning">💣 Spam 50x</button>
+                    <button id="spam100Btn" class="btn-danger">🔥 Spam 100x</button>
+                    <button id="loopStartBtn" class="btn-info">🔄 Loop Infinity</button>
+                    <button id="loopStopBtn">⏹️ Stop Loop</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>📝 Pesan Promo</h3>
+                <textarea id="messageBox" rows="3" placeholder="Tulis pesan promosi atau broadcast..."></textarea>
+                <button id="randomMsgBtn">🎲 Random Promo</button>
+                <button id="callBombBtn" class="btn-danger">📞 Call Bomb (200x)</button>
+            </div>
+            <div class="card">
+                <h3>👥 Broadcast Massal</h3>
+                <textarea id="bulkNumbers" rows="2" placeholder="628111111,628222222,628333333"></textarea>
+                <button id="broadcastBtn">📢 Kirim ke Semua</button>
+                <button id="smartSpamBtn">🧠 Smart Spam (30x random delay)</button>
+                <button id="exportLogBtn">📁 Export Log</button>
+            </div>
+        </div>
+        <div class="log-area" id="logPanel">
+            <div class="log-line">[SYSTEM] Panel marketing siap digunakan.</div>
+            <div class="log-line">[INFO] Login dengan manz / Manz123 untuk akses penuh.</div>
+        </div>
+        <div class="footer">
+            ⚡ Untuk keperluan promosi bisnis & komunikasi massal. Gunakan dengan bijak.
+        </div>
+    </div>
+</div>
+
+<script>
+    const VALID_USER = "manz";
+    const VALID_PASS = "Manz123";
+    let logged = false;
+    let loopInterval = null;
+    let loopActive = false;
+    let callActive = false;
+
+    const promoMessages = [
+        "🔥 PROMO SPESIAL! Diskon 70% hanya hari ini!",
+        "🎉 Gratis Ongkir + Cashback 100rb!",
+        "💎 Event Terbatas! Dapatkan Hadiah Langsung",
+        "⚡ Buruan! Stok terbatas, order sekarang",
+        "🏆 Anda terpilih klaim voucher 500rb",
+        "📦 Produk baru! Cobain gratis sekarang"
+    ];
+
+    function addLog(msg, isErr = false) {
+        const logDiv = document.getElementById('logPanel');
+        const line = document.createElement('div');
+        line.className = 'log-line';
+        if(isErr) line.style.color = "#ff8888";
+        line.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+        logDiv.appendChild(line);
+        logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    async function sendWa(number, text) {
+        return new Promise(resolve => {
+            addLog(`📤 Mengirim ke ${number}: "${text.substring(0,45)}..."`);
+            setTimeout(resolve, 100);
+        });
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+        const u = document.getElementById('loginUser').value.trim();
+        const p = document.getElementById('loginPass').value.trim();
+        if(u === VALID_USER && p === VALID_PASS) {
+            logged = true;
+            document.getElementById('loginArea').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            addLog("✅ Login berhasil! Selamat datang, manz.");
+            addLog("📢 Panel broadcast siap digunakan.");
+        } else {
+            alert("Username atau password salah goblok!");
+        }
+    });
+
+    // Kirim sekali
+    document.getElementById('sendOnceBtn').addEventListener('click', async () => {
+        const target = document.getElementById('targetNumber').value.trim();
+        const msg = document.getElementById('messageBox').value.trim();
+        if(!target || !msg) return addLog("❌ Target dan pesan harus diisi!", true);
+        await sendWa(target, msg);
+        addLog(`✅ Pesan terkirim ke ${target}`);
+    });
+
+    // Spam 50x
+    document.getElementById('spam50Btn').addEventListener('click', async () => {
+        const target = document.getElementById('targetNumber').value.trim();
+        if(!target) return addLog("❌ Target kosong!", true);
+        const msg = document.getElementById('messageBox').value.trim() || "Promo spesial!";
+        addLog(`💣 Memulai SPAM 50x ke ${target}`);
+        for(let i=1; i<=50; i++) {
+            await sendWa(target, `${msg} [${i}/50]`);
+            await new Promise(r => setTimeout(r, 80));
+        }
+        addLog(`✅ Spam 50x selesai ke ${target}`);
+    });
+
+    // Spam 100x
+    document.getElementById('spam100Btn').addEventListener('click', async () => {
+        const target = document.getElementById('targetNumber').value.trim();
+        if(!target) return addLog("❌ Target kosong!", true);
+        const msg = document.getElementById('messageBox').value.trim() || "Promo spesial!";
+        addLog(`🔥 Memulai SPAM 100x ke ${target}`);
+        for(let i=1; i<=100; i++) {
+            await sendWa(target, `${msg} [${i}/100]`);
+            await new Promise(r => setTimeout(r, 70));
+        }
+        addLog(`✅ Spam 100x selesai ke ${target}`);
+    });
+
+    // Loop Infinity
+    document.getElementById('loopStartBtn').addEventListener('click', () => {
+        if(loopActive) return addLog("⚠️ Loop sudah berjalan!", true);
+        const target = document.getElementById('targetNumber').value.trim();
+        if(!target) return addLog("❌ Target kosong!", true);
+        loopActive = true;
+        let count = 0;
+        addLog(`🔄 LOOP INFINITY dimulai ke ${target}`);
+        loopInterval = setInterval(async () => {
+            if(!loopActive) return;
+            count++;
+            const msg = document.getElementById('messageBox').value.trim() || "Loop message";
+            await sendWa(target, `${msg} [Loop-${count}]`);
+        }, 550);
+    });
+    document.getElementById('loopStopBtn').addEventListener('click', () => {
+        if(loopInterval) clearInterval(loopInterval);
+        loopActive = false;
+        addLog("⏹️ Loop dihentikan");
+    });
+
+    // Random Promo
+    document.getElementById('randomMsgBtn').addEventListener('click', () => {
+        const rand = promoMessages[Math.floor(Math.random() * promoMessages.length)];
+        document.getElementById('messageBox').value = rand;
+        addLog(`🎲 Pesan random: "${rand}"`);
+    });
+
+    // Call Bomb
+    document.getElementById('callBombBtn').addEventListener('click', () => {
+        const target = document.getElementById('targetNumber').value.trim();
+        if(!target) return addLog("❌ Target kosong!", true);
+        if(callActive) return addLog("Call bomb sudah aktif", true);
+        callActive = true;
+        let count = 0;
+        addLog(`📞 CALL BOMB 200x ke ${target}`);
+        const bomb = setInterval(() => {
+            count++;
+            addLog(`📞 Panggilan fake #${count} ke ${target}`);
+            if(count >= 200) {
+                clearInterval(bomb);
+                callActive = false;
+                addLog(`☠️ Call bomb selesai ke ${target}`);
+            }
+        }, 550);
+    });
+
+    // Broadcast massal
+    document.getElementById('broadcastBtn').addEventListener('click', async () => {
+        const raw = document.getElementById('bulkNumbers').value;
+        if(!raw) return addLog("❌ Daftar nomor kosong!", true);
+        const numbers = raw.split(/[ ,\n]+/).filter(n => n.trim().length > 8);
+        if(numbers.length === 0) return addLog("❌ Nomor tidak valid!", true);
+        const msg = document.getElementById('messageBox').value.trim() || "Broadcast massal";
+        addLog(`📢 BROADCAST ke ${numbers.length} nomor`);
+        for(let num of numbers) {
+            await sendWa(num, msg);
+            await new Promise(r => setTimeout(r, 90));
+        }
+        addLog(`✅ Broadcast selesai ke ${numbers.length} nomor`);
+    });
+
+    // Smart Spam
+    document.getElementById('smartSpamBtn').addEventListener('click', async () => {
+        const target = document.getElementById('targetNumber').value.trim();
+        if(!target) return addLog("❌ Target kosong!", true);
+        const msg = document.getElementById('messageBox').value.trim() || "Smart spam";
+        addLog(`🧠 SMART SPAM 30x ke ${target} (random delay)`);
+        for(let i=1; i<=30; i++) {
+            await sendWa(target, `${msg} [Smart-${i}]`);
+            await new Promise(r => setTimeout(r, Math.random() * 300 + 80));
+        }
+        addLog(`✅ Smart spam selesai ke ${target}`);
+    });
+
+    // Export log
+    document.getElementById('exportLogBtn').addEventListener('click', () => {
+        const logs = document.querySelectorAll('#logPanel .log-line');
+        let content = "=== LOG BROADCAST ===\n" + new Date().toLocaleString() + "\n\n";
+        logs.forEach(l => { content += l.innerText + "\n"; });
+        const blob = new Blob([content], {type: "text/plain"});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `wa_log_${Date.now()}.txt`;
+        a.click();
+        addLog("📁 Log berhasil diekspor");
+    });
+
+    addLog("[SYS] Panel siap. Login dengan manz / Manz123");
+</script>
+</body>
+</html>
